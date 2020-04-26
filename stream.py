@@ -23,10 +23,6 @@ def callFFmpeg(filename: str):
     ffmpeg_process.wait()
 
 
-def stream_main():
+def stream_main(my_pl):
     while(1):
-        for root, _, files in os.walk(os.path.abspath("../mnt")):
-            for filename in files:
-                if filename.endswith(".mp4"):
-                    abs_path = os.path.join(root, filename)
-                    callFFmpeg(abs_path)    
+        callFFmpeg(my_pl.get_next_vid())
