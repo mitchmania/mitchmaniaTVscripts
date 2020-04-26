@@ -14,5 +14,9 @@ class Playlist():
                     self.pl.append(abs_path)
 
     def get_next_vid(self):
-        self.index += 1
+        if self.index == len(self.pl) -1:
+            self.index = 0
+        else:
+            self.index += 1
+
         return self.pl[self.index]
