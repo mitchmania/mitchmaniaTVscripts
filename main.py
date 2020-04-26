@@ -11,9 +11,10 @@ def main():
 
     stream_thread = threading.Thread(target=stream.stream_main, args=(my_pl,))
     stream_thread.start()
-    rest_thread = threading.Thread(target=rest_interface.app.run)
-    rest_thread.start()
-    rest_thread.join()
+    # rest_thread = threading.Thread(target=rest_interface.app.run)
+    # rest_thread.start()
+    
+    stream_thread.join()
 
 if __name__ == "__main__":
     main()
