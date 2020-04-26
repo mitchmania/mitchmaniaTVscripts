@@ -1,10 +1,22 @@
+from flask import Flask
 import os
 import subprocess
+import threading
 
 
 vid_dir = "../mnt"
 
+app = Flask(__name__)
+
+current_video = ""
+
+@app.route("/")
+def main_route():
+    return current_video
+
 def callFFmpeg(filename: str):
+    global current_video
+    current_video = filename
     ffmpeg_process = subprocess.Popen([
         "/usr/bin/ffmpeg",
         "-re",
@@ -20,6 +32,7 @@ def callFFmpeg(filename: str):
 
 
 def main():
+    threading.Thread(target=app.run).start()
     while(1):
         for root, _, files in os.walk(os.path.abspath("../mnt")):
             for filename in files:
